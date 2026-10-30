@@ -8,6 +8,7 @@ A .NET Web API that turns valid long URLs into short links and redirects short l
 - `GET /{code}` redirects to the original URL with `302 Found`. Unknown or invalid codes return `404 Not Found`.
 - New short codes are URL-safe Base64 encodings of the request-received Unix epoch timestamp in nanoseconds. The store advances timestamps monotonically to avoid collisions when requests arrive within the same system-clock tick. Legacy Base62 links remain supported.
 - Mappings are stored in `App_Data/url-mappings.json` by default.
+- Each stored mapping has a sequential `seqNumber` used as an internal record ID; it is separate from the short code and is not included in the short URL.
 - The API also provides `GET /health`.
 
 The API accepts absolute HTTP or HTTPS URLs up to 2,048 characters. It rejects malformed URLs and URLs that point back to the shortener service. The encode endpoint has an 8 KB request-body limit and a default rate limit of 30 requests per minute per process.
