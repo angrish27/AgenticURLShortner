@@ -27,6 +27,14 @@ This project uses AI coding agents as active participants in software developmen
 
 The workflow is defined in the repository root [`AGENTS.md`](AGENTS.md), with detailed architecture and coding guidance in [`AgentUrlShortner/docs/agent-instructions.md`](AgentUrlShortner/docs/agent-instructions.md). See the [agent-driven change example](AgentUrlShortner/docs/agentic-development-example.md) for a sample task and its test report. The API itself remains a conventional URL shortener; it does not require AI to run.
 
+Run a task from the repository root with Copilot CLI installed and authenticated:
+
+```bash
+dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- "Describe the code change"
+```
+
+The runner asks Copilot to implement the task, runs the backend test suite, and gives Copilot up to two retries if tests fail. It stops for explicit human approval after tests pass; it never commits or merges.
+
 ## IDesign approach
 
 The backend follows an IDesign Method-style, volatility-based layered architecture. Requests flow through:
