@@ -104,4 +104,4 @@ The generated token is an 11-character, URL-safe Base64 value and varies with re
 
 For Postman, choose POST, enter the endpoint URL, then select Body -> raw -> JSON and paste the request body above. If Postman reports a certificate error with the local HTTPS endpoint, trust the .NET development certificate using the setup command above.
 
-End of file
+# End of file - 2026-11-02
