@@ -42,6 +42,7 @@ AgentUrlShortner/
 | [flow-mapping.md](flow-mapping.md) | Endpoint → Manager → Engine/Accessor call maps |
 | [testing.md](testing.md) | Test projects, base classes, conventions |
 | [infra.md](infra.md) | Pulumi stack, Azure resources, config, deployment |
+| [orchestration.md](orchestration.md) | Stateful SDLC workflow, approvals, audit, recovery, metrics |
 
 ## Key facts (quick reference)
 - Target framework: `net10.0`; `Nullable=disable`; `ImplicitUsings=disable`; `TreatWarningsAsErrors=true`.
@@ -50,6 +51,7 @@ AgentUrlShortner/
 - Correlation header: `x-correlation-id`. Health endpoint: `/health`.
 - Test framework: **MSTest**. Shared test base: `CS.AgenticUrlShortner.Shared.Tests.TestBase`.
 - IaC: **Pulumi (azure-native, C#)** → Resource Group, Log Analytics, App Insights, Linux App Service Plan, Web App.
+- Agentic workflow: persisted stage DAG in `Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator`; execution state is local and ignored by Git.
 
 ## Glossary
 | Term | Meaning |

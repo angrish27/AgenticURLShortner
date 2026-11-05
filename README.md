@@ -30,10 +30,22 @@ The workflow is defined in the repository root [`AGENTS.md`](AGENTS.md), with de
 Run a task from the repository root with Copilot CLI installed and authenticated:
 
 ```bash
-dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- "Describe the code change"
+dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- run "Describe the code change"
 ```
 
-The runner asks Copilot to implement the task, runs the backend test suite, and gives Copilot up to two retries if tests fail. It stops for explicit human approval after tests pass; it never commits or merges.
+The runner persists a dependency-graph SDLC workflow: requirements and design artifacts, a design approval checkpoint, implementation, a release build, parallel unit/API/security validation, documentation, release approval, and release-readiness evidence. State, per-stage logs, artifacts, and an append-only audit trail are written under `AgentUrlShortner/orchestration/.runtime/runs/` (ignored by Git). The workflow stops for human approvals and on failures; agent stages have bounded attempts, and changing upstream artifacts invalidates dependent work.
+
+Use the run ID printed by the tool to inspect, approve, resume, or replan:
+
+```bash
+dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- status <runId>
+dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- approve <runId> design-approval "<reviewer>"
+dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- resume <runId>
+dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- replan <runId> implementation
+dotnet run --project "AgentUrlShortner/Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator/CS.AgenticUrlShortner.Orchestrator.csproj" -- rollback <runId> --confirm
+```
+
+Rollback is available only when the worktree was clean at run start and still exactly matches the recorded output checkpoint; it refuses to overwrite subsequent edits. It is never automatic. The workflow does not commit, merge, or deploy. See [orchestration design](AgentUrlShortner/docs/orchestration.md).
 
 ## IDesign approach
 

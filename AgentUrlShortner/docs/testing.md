@@ -15,6 +15,7 @@
 | `Tests.UtilityTests` | Utilities | |
 | `Tests.CommonTests` | Common | e.g. `FactoryBaseTests` |
 | `Tests.ApiTests` | HTTP layer (end-to-end) | `WebApplicationFactory<Startup>`, temp store per test; status codes, Location, startup load/corrupt store |
+| `CS.AgenticUrlShortner.OrchestratorTests` | Agentic workflow | DAG validation, parallel readiness, fingerprints, policy guardrails, and guarded Git rollback |
 
 Each layer exposes internals to its test project via `[assembly: InternalsVisibleTo("CS.AgenticUrlShortner.Tests.<Layer>Tests")]`.
 
@@ -43,3 +44,6 @@ public abstract class TestBase
 
 ## Definition of done
 `dotnet build` (warnings are errors) and `dotnet test` both pass.
+
+Orchestrator rollback tests create isolated temporary Git repositories and verify both successful
+rollback and refusal when post-checkpoint changes are present.

@@ -36,3 +36,11 @@
 
 ## Change control
 Update the status column as features land. New scope items must be added here before implementation.
+
+## Agentic development prototype
+The separate developer workflow is in scope for the assessment: requirement normalization, design
+artifacts, explicit design/release approvals, implementation, parallel verification, documentation,
+release readiness, audit, persisted state, bounded agent retries, safe stop, replanning, and guarded
+rollback are implemented by the orchestrator. It does not deploy or merge changes, provide a
+multi-user hosted control plane, or guarantee that an LLM's output is correct; human review remains
+required.

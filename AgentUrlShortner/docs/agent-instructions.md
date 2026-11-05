@@ -30,6 +30,14 @@ Use this plan → implement → test → report workflow for code changes:
 
 See [agentic-development-example.md](agentic-development-example.md) for an example change report.
 
+## Agentic SDLC orchestrator
+The orchestrator in `Backend/8. Tools/CS.AgenticUrlShortner.Orchestrator` executes a persisted,
+dependency-gated SDLC plan. Requirement and design artifacts precede an explicit architecture
+approval; implementation is followed by a build and parallel unit, API, and security checks.
+Documentation and release readiness require those checks to pass. Use the `status`, `approve`,
+`resume`, `replan`, and guarded `rollback` commands described in [orchestration.md](orchestration.md).
+The agent must preserve unrelated work and must not commit, merge, or deploy.
+
 ## Solution structure
 - Projects live on disk under the numbered folders (`Backend/3. Managers/...`) and in matching solution folders.
 - New projects: place in the right numbered folder and add with

@@ -23,7 +23,8 @@ namespace CS.AgenticUrlShortner.ReleaseReadiness
         private static readonly string[] RequiredDocs =
         [
             "scope.md", "decisions.md", "security.md", "testing.md", "architecture.md",
-            "scenarios/greenfield.md", "scenarios/brownfield.md"
+            "orchestration.md", "scenarios/greenfield.md", "scenarios/brownfield.md",
+            "scenarios/ambiguous.md"
         ];
 
         private static readonly Regex SecretPattern = new(
